@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b1020">
   <meta name="description" content="NovaMart - Shop modern gadgets and everyday essentials.">
+  <meta property="og:title" content="NovaMart | Shop Smarter">
+  <meta property="og:description" content="Discover modern gadgets and everyday essentials at NovaMart.">
+  <meta property="og:type" content="website">
   <title>NovaMart | Shop Smarter</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
 
     :root {
       --bg: #f5f7fc;
@@ -24,9 +24,7 @@
       --border: #e5eaf2;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 20px; }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -35,19 +33,12 @@
       line-height: 1.5;
     }
 
-    body.cart-open {
-      overflow: hidden;
-    }
+    body.cart-open { overflow: hidden; }
 
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
+    button, a, input { font: inherit; -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
 
-    button {
-      font: inherit;
-    }
-
-    button:focus-visible, a:focus-visible {
+    button:focus-visible, a:focus-visible, input:focus-visible {
       outline: 3px solid var(--accent);
       outline-offset: 3px;
     }
@@ -63,7 +54,7 @@
     header {
       background: var(--dark);
       color: white;
-      padding: 19px 7%;
+      padding: 19px 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -79,9 +70,7 @@
       text-decoration: none;
     }
 
-    .logo span {
-      color: var(--accent);
-    }
+    .logo span { color: var(--accent); }
 
     nav {
       display: flex;
@@ -96,9 +85,7 @@
       text-decoration: none;
     }
 
-    nav a:hover {
-      color: var(--accent);
-    }
+    nav a:hover { color: var(--accent); }
 
     .cart-button {
       background: var(--accent);
@@ -107,12 +94,9 @@
       border-radius: 10px;
       padding: 11px 16px;
       font-weight: 700;
-      cursor: pointer;
     }
 
-    .cart-button:hover, .primary-button:hover {
-      filter: brightness(1.08);
-    }
+    .cart-button:hover, .primary-button:hover { filter: brightness(1.08); }
 
     .hero {
       width: 88%;
@@ -159,7 +143,6 @@
       padding: 13px 20px;
       font-weight: 800;
       text-decoration: none;
-      cursor: pointer;
     }
 
     .benefits {
@@ -177,32 +160,85 @@
       border-radius: 13px;
     }
 
-    .benefit strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .benefit p {
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .benefit strong { display: block; margin-bottom: 5px; }
+    .benefit p { color: var(--muted); font-size: 13px; }
 
     main {
       width: 88%;
       margin: 65px auto;
     }
 
-    .section-heading {
-      margin-bottom: 25px;
-    }
+    .section-heading { margin-bottom: 25px; }
 
     .section-heading h2 {
       font-size: clamp(25px, 4vw, 35px);
       margin-bottom: 6px;
     }
 
-    .section-heading p {
+    .section-heading p { color: var(--muted); }
+
+    /* Search and category filters */
+    .shop-tools {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1 1 260px;
+      max-width: 430px;
+    }
+
+    .search-wrap span {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 17px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 13px 15px 13px 43px;
+      border: 1px solid #d7dfeb;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .search-input:focus {
+      border-color: #0284c7;
+      outline: 3px solid #38bdf833;
+    }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .filter-btn {
+      border: 1px solid #d7dfeb;
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter-btn:hover { border-color: #0284c7; color: #0369a1; }
+
+    .filter-btn.active {
+      background: var(--dark);
+      color: white;
+      border-color: var(--dark);
+    }
+
+    .result-count {
       color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 15px;
     }
 
     .products {
@@ -218,6 +254,8 @@
       border-radius: 17px;
       padding: 15px;
       transition: transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .product:hover {
@@ -243,10 +281,7 @@
       font-weight: 800;
     }
 
-    .product h3 {
-      font-size: 17px;
-      margin: 7px 0;
-    }
+    .product h3 { font-size: 17px; margin: 7px 0; }
 
     .product-description {
       min-height: 40px;
@@ -269,11 +304,26 @@
       background: var(--dark);
       color: white;
       font-weight: 700;
-      cursor: pointer;
+      margin-top: auto;
     }
 
-    .add-btn:hover {
-      background: #173e71;
+    .add-btn:hover { background: #173e71; }
+
+    .empty-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 45px 20px;
+      background: white;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      color: var(--muted);
+    }
+
+    .empty-results strong {
+      display: block;
+      color: var(--text);
+      font-size: 19px;
+      margin-bottom: 7px;
     }
 
     .about {
@@ -283,10 +333,7 @@
       margin-top: 55px;
     }
 
-    .about p {
-      color: #52627b;
-      margin-top: 8px;
-    }
+    .about p { color: #52627b; margin-top: 8px; }
 
     footer {
       background: var(--dark);
@@ -296,13 +343,9 @@
       margin-top: 65px;
     }
 
-    footer p {
-      color: #cbd5e1;
-      font-size: 13px;
-    }
+    footer p { color: #cbd5e1; font-size: 13px; }
 
-    /* Cart drawer */
-
+    /* Shopping cart drawer */
     .cart-overlay {
       position: fixed;
       inset: 0;
@@ -313,10 +356,7 @@
       z-index: 1000;
     }
 
-    .cart-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .cart-overlay.active { opacity: 1; visibility: visible; }
 
     .cart-panel {
       position: fixed;
@@ -336,9 +376,7 @@
       box-shadow: -15px 0 50px #0002;
     }
 
-    .cart-panel.active {
-      transform: translateX(0);
-    }
+    .cart-panel.active { transform: translateX(0); }
 
     .cart-header {
       display: flex;
@@ -349,9 +387,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .cart-header h2 {
-      font-size: 23px;
-    }
+    .cart-header h2 { font-size: 23px; }
 
     .close-cart {
       width: 39px;
@@ -359,15 +395,10 @@
       border: 0;
       border-radius: 10px;
       background: #edf2f8;
-      cursor: pointer;
       font-size: 20px;
     }
 
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 8px 0;
-    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 8px 0; }
 
     .cart-empty {
       color: var(--muted);
@@ -383,10 +414,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .cart-item h3 {
-      font-size: 15px;
-      overflow-wrap: anywhere;
-    }
+    .cart-item h3 { font-size: 15px; overflow-wrap: anywhere; }
 
     .cart-item-price {
       color: #0369a1;
@@ -407,14 +435,10 @@
       border: 1px solid var(--border);
       border-radius: 7px;
       background: #f8fafc;
-      cursor: pointer;
       font-weight: 800;
     }
 
-    .quantity-controls span {
-      min-width: 15px;
-      text-align: center;
-    }
+    .quantity-controls span { min-width: 15px; text-align: center; }
 
     .remove-item {
       align-self: start;
@@ -423,14 +447,10 @@
       border: 0;
       border-radius: 7px;
       padding: 8px;
-      cursor: pointer;
       font-size: 12px;
     }
 
-    .cart-footer {
-      border-top: 1px solid var(--border);
-      padding-top: 18px;
-    }
+    .cart-footer { border-top: 1px solid var(--border); padding-top: 18px; }
 
     .cart-total {
       display: flex;
@@ -440,13 +460,8 @@
       margin-bottom: 16px;
     }
 
-    .cart-total strong {
-      overflow-wrap: anywhere;
-    }
-
-    .cart-footer .add-btn {
-      background: #0284c7;
-    }
+    .cart-total strong { overflow-wrap: anywhere; }
+    .cart-footer .add-btn { background: #0284c7; }
 
     .cart-note {
       color: var(--muted);
@@ -456,87 +471,38 @@
     }
 
     @media (max-width: 950px) {
-      .products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .benefits {
-        grid-template-columns: 1fr;
-      }
+      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .benefits { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 600px) {
-      header {
-        padding: 18px 5%;
-      }
-
-      nav {
-        width: 100%;
-        gap: 17px;
-      }
-
-      .hero {
-        width: 92%;
-        padding: 42px 7%;
-        margin: 22px auto;
-      }
-
-      .hero h1 {
-        letter-spacing: -1px;
-      }
-
-      main, .benefits {
-        width: 92%;
-      }
-
-      main {
-        margin-top: 42px;
-      }
-
-      .products {
-        gap: 12px;
-      }
-
-      .product {
-        padding: 10px;
-      }
-
-      .product-art {
-        height: 125px;
-        font-size: 49px;
-      }
-
-      .product h3 {
-        font-size: 15px;
-      }
-
-      .product-description {
-        font-size: 12px;
-      }
-
-      .price {
-        font-size: 16px;
-      }
-
-      .add-btn {
-        font-size: 12px;
-        padding: 11px 6px;
-      }
-
-      .cart-panel {
-        padding: 18px;
-      }
+      header { padding: 18px 5%; gap: 14px; }
+      nav { width: 100%; gap: 17px; order: 3; }
+      .hero { width: 92%; padding: 42px 7%; margin: 22px auto; }
+      .hero h1 { letter-spacing: -1px; }
+      main, .benefits { width: 92%; }
+      main { margin-top: 42px; }
+      .shop-tools { align-items: stretch; }
+      .search-wrap { max-width: none; flex-basis: 100%; }
+      .filters { gap: 7px; }
+      .filter-btn { padding: 9px 12px; }
+      .products { gap: 12px; }
+      .product { padding: 10px; }
+      .product-art { height: 125px; font-size: 49px; }
+      .product h3 { font-size: 15px; }
+      .product-description { font-size: 12px; }
+      .price { font-size: 16px; }
+      .add-btn { font-size: 12px; padding: 11px 6px; }
+      .cart-panel { padding: 18px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    ✨ Discover your next favorite product at NovaMart
-  </div>
+  <div class="topbar">✨ Discover your next favorite product at NovaMart</div>
 
   <header>
-    <a href="#" class="logo">Nova<span>Mart</span></a>
+    <a href="#" class="logo" aria-label="NovaMart home">Nova<span>Mart</span></a>
 
     <nav aria-label="Main navigation">
       <a href="#">Home</a>
@@ -552,10 +518,7 @@
   <section class="hero">
     <div class="eyebrow">The smarter way to shop</div>
     <h1>Shop Smarter.<br>Live Better.</h1>
-    <p>
-      Discover modern gadgets and everyday essentials
-      in one place. Find your favorites and build your cart.
-    </p>
+    <p>Discover modern gadgets and everyday essentials in one place. Find your favorites and build your cart.</p>
     <a href="#products" class="primary-button">Explore Products →</a>
   </section>
 
@@ -577,56 +540,79 @@
   <main id="products">
     <div class="section-heading">
       <h2>Featured Products</h2>
-      <p>Explore our selection of everyday favorites.</p>
+      <p>Search by name or choose a category to find your favorites.</p>
     </div>
 
-    <div class="products">
-      <article class="product">
+    <div class="shop-tools">
+      <label class="search-wrap">
+        <span aria-hidden="true">🔎</span>
+        <input
+          class="search-input"
+          id="product-search"
+          type="search"
+          placeholder="Search products..."
+          aria-label="Search products"
+          autocomplete="off"
+        >
+      </label>
+
+      <div class="filters" role="group" aria-label="Filter products by category">
+        <button class="filter-btn active" type="button" data-category="all" aria-pressed="true">All Products</button>
+        <button class="filter-btn" type="button" data-category="audio" aria-pressed="false">Audio</button>
+        <button class="filter-btn" type="button" data-category="wearables" aria-pressed="false">Wearables</button>
+        <button class="filter-btn" type="button" data-category="lifestyle" aria-pressed="false">Lifestyle</button>
+      </div>
+    </div>
+
+    <p class="result-count" id="result-count" aria-live="polite">Showing 4 products</p>
+
+    <div class="products" id="product-grid">
+      <article class="product" data-category="audio" data-search="wireless headphones music audio gadgets">
         <div class="product-art" aria-hidden="true">🎧</div>
         <div class="product-tag">Audio</div>
         <h3>Wireless Headphones</h3>
         <p class="product-description">Enjoy music with a modern everyday design.</p>
         <div class="price">Rs. 3,500</div>
-        <button type="button" class="add-btn"
-          onclick="addToCart('headphones')">Add to Cart</button>
+        <button type="button" class="add-btn" onclick="addToCart('headphones')">Add to Cart</button>
       </article>
 
-      <article class="product">
+      <article class="product" data-category="wearables" data-search="smart watch wearable fitness time gadget">
         <div class="product-art" aria-hidden="true">⌚</div>
         <div class="product-tag">Wearables</div>
         <h3>Smart Watch</h3>
         <p class="product-description">A smart accessory for your daily routine.</p>
         <div class="price">Rs. 5,000</div>
-        <button type="button" class="add-btn"
-          onclick="addToCart('watch')">Add to Cart</button>
+        <button type="button" class="add-btn" onclick="addToCart('watch')">Add to Cart</button>
       </article>
 
-      <article class="product">
+      <article class="product" data-category="lifestyle" data-search="everyday backpack bag lifestyle travel">
         <div class="product-art" aria-hidden="true">🎒</div>
         <div class="product-tag">Lifestyle</div>
         <h3>Everyday Backpack</h3>
         <p class="product-description">Carry your essentials wherever you go.</p>
         <div class="price">Rs. 2,200</div>
-        <button type="button" class="add-btn"
-          onclick="addToCart('backpack')">Add to Cart</button>
+        <button type="button" class="add-btn" onclick="addToCart('backpack')">Add to Cart</button>
       </article>
 
-      <article class="product">
+      <article class="product" data-category="audio" data-search="bluetooth speaker sound audio music gadget">
         <div class="product-art" aria-hidden="true">🔊</div>
         <div class="product-tag">Audio</div>
         <h3>Bluetooth Speaker</h3>
         <p class="product-description">Bring your favorite sounds to life.</p>
         <div class="price">Rs. 2,800</div>
-        <button type="button" class="add-btn"
-          onclick="addToCart('speaker')">Add to Cart</button>
+        <button type="button" class="add-btn" onclick="addToCart('speaker')">Add to Cart</button>
       </article>
+
+      <p class="empty-results" id="no-results" hidden>
+        <strong>No products found</strong>
+        Try another search or select a different category.
+      </p>
     </div>
 
     <section class="about" id="about">
       <h2>Welcome to NovaMart</h2>
       <p>
-        NovaMart is a demonstration e-commerce project built by
-        Ayan Ali to showcase web development skills.
+        NovaMart is a demonstration e-commerce project built by Ayan Ali to showcase web development skills.
         This demo does not process real orders or payments.
       </p>
     </section>
@@ -636,18 +622,20 @@
     <p>© 2026 NovaMart | E-commerce Demo by Ayan Ali</p>
   </footer>
 
-  <!-- Cart panel -->
-  <div class="cart-overlay" id="cart-overlay"
-       onclick="closeCart()"></div>
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 
-  <aside class="cart-panel" id="cart-panel"
-         aria-label="Shopping cart" aria-hidden="true"
-         role="dialog" aria-modal="true">
-
+  <aside
+    class="cart-panel"
+    id="cart-panel"
+    aria-label="Shopping cart"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-title"
+  >
     <div class="cart-header">
-      <h2>Your Cart</h2>
-      <button type="button" class="close-cart"
-              onclick="closeCart()" aria-label="Close cart">✕</button>
+      <h2 id="cart-title">Your Cart</h2>
+      <button type="button" class="close-cart" onclick="closeCart()" aria-label="Close cart">✕</button>
     </div>
 
     <div class="cart-items" id="cart-items"></div>
@@ -657,16 +645,14 @@
         <span>Total</span>
         <strong id="cart-total">Rs. 0</strong>
       </div>
-      <button type="button" class="add-btn" onclick="closeCart()">
-        Continue Shopping
-      </button>
-      <p class="cart-note">
-        Demo store only. No real order or payment is processed.
-      </p>
+      <button type="button" class="add-btn" onclick="closeCart()">Continue Shopping</button>
+      <p class="cart-note">Demo store only. No real order or payment is processed.</p>
     </div>
   </aside>
 
   <script>
+    "use strict";
+
     const PRODUCTS = {
       headphones: { name: "Wireless Headphones", price: 3500 },
       watch: { name: "Smart Watch", price: 5000 },
@@ -676,6 +662,7 @@
 
     const STORAGE_KEY = "novamart-cart-v2";
     let cart = loadCart();
+    let activeCategory = "all";
 
     function loadCart() {
       try {
@@ -711,8 +698,7 @@
     }
 
     function addToCart(id) {
-      const product = PRODUCTS[id];
-      if (!product) return;
+      if (!PRODUCTS[id]) return;
 
       const existing = cart.find(item => item.id === id);
 
@@ -759,7 +745,6 @@
       const countElement = document.getElementById("cart-count");
 
       const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-
       countElement.textContent = count;
 
       const total = cart.reduce((sum, item) => {
@@ -842,11 +827,54 @@
       openCart();
     }
 
+    function filterProducts() {
+      const query = document.getElementById("product-search").value.trim().toLowerCase();
+      const cards = [...document.querySelectorAll(".product")];
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const matchesCategory =
+          activeCategory === "all" || card.dataset.category === activeCategory;
+
+        const searchableText =
+          (card.dataset.search + " " + card.textContent).toLowerCase();
+
+        const matchesSearch = searchableText.includes(query);
+        const visible = matchesCategory && matchesSearch;
+
+        card.hidden = !visible;
+
+        if (visible) visibleCount++;
+      });
+
+      document.getElementById("result-count").textContent =
+        `Showing ${visibleCount} of ${cards.length} products`;
+
+      document.getElementById("no-results").hidden = visibleCount !== 0;
+    }
+
+    document.getElementById("product-search").addEventListener("input", filterProducts);
+
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.category;
+
+        document.querySelectorAll(".filter-btn").forEach(filter => {
+          const selected = filter === button;
+          filter.classList.toggle("active", selected);
+          filter.setAttribute("aria-pressed", String(selected));
+        });
+
+        filterProducts();
+      });
+    });
+
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") closeCart();
     });
 
     renderCart();
+    filterProducts();
   </script>
 </body>
 </html>
