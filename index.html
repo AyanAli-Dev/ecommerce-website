@@ -4,504 +4,849 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="NovaMart - Shop modern gadgets and everyday essentials.">
   <title>NovaMart | Shop Smarter</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f8fc;
-      color: #172033;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
+    :root {
+      --bg: #f5f7fc;
+      --dark: #0b1020;
+      --accent: #38bdf8;
+      --text: #182238;
+      --muted: #68758a;
+      --border: #e5eaf2;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    body.cart-open {
+      overflow: hidden;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .topbar {
+      background: #070b16;
+      color: #dbeafe;
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 13px;
+    }
+
     header {
-      background: #111827;
+      background: var(--dark);
       color: white;
-      padding: 20px 7%;
+      padding: 19px 7%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 20px;
       flex-wrap: wrap;
     }
-    .logo { font-size: 27px; font-weight: bold; }
-    .logo span { color: #38bdf8; }
-    nav { display: flex; gap: 20px; flex-wrap: wrap; }
-    nav a { color: white; text-decoration: none; }
-    .cart {
-      background: #38bdf8;
-      color: #111827;
+
+    .logo {
+      color: white;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .cart-button {
+      background: var(--accent);
+      color: #07111e;
       border: 0;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 11px 16px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
     }
+
+    .cart-button:hover, .primary-button:hover {
+      filter: brightness(1.08);
+    }
+
     .hero {
-      margin: 28px auto;
       width: 88%;
-      padding: 65px 8%;
-      border-radius: 20px;
-      background: linear-gradient(120deg, #172554, #0369a1);
+      margin: 32px auto;
+      padding: 75px 8%;
+      border-radius: 24px;
+      overflow: hidden;
       color: white;
+      background:
+        radial-gradient(circle at 85% 25%, #0ea5e9 0, transparent 28%),
+        linear-gradient(125deg, #10172e, #173e71 70%, #075985);
     }
-    .hero h1 { font-size: clamp(32px, 5vw, 54px); margin-bottom: 18px; }
-    .hero p { line-height: 1.7; max-width: 520px; margin-bottom: 25px; }
-    .shop-btn {
+
+    .eyebrow {
+      color: #7dd3fc;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      letter-spacing: -2px;
+      line-height: 1.08;
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .primary-button {
       display: inline-block;
+      background: var(--accent);
+      color: #07111e;
+      border: 0;
+      border-radius: 9px;
       padding: 13px 20px;
-      border-radius: 8px;
-      background: #fff;
-      color: #172554;
+      font-weight: 800;
       text-decoration: none;
-      font-weight: bold;
+      cursor: pointer;
     }
-    main { width: 88%; margin: 45px auto; }
-    .section-heading { margin-bottom: 22px; }
+
+    .benefits {
+      width: 88%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .benefit {
+      background: white;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      width: 88%;
+      margin: 65px auto;
+    }
+
+    .section-heading {
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px, 4vw, 35px);
+      margin-bottom: 6px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
     }
+
     .product {
+      min-width: 0;
       background: white;
-      border-radius: 15px;
-      padding: 18px;
-      box-shadow: 0 5px 20px #1720330d;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 15px;
+      transition: transform .2s, box-shadow .2s;
     }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px #17203312;
+    }
+
     .product-art {
-      height: 155px;
+      height: 175px;
       display: grid;
       place-items: center;
-      background: #eef5fb;
+      background: linear-gradient(145deg, #edf5ff, #f3f0ff);
       border-radius: 12px;
-      font-size: 66px;
-      margin-bottom: 16px;
+      font-size: 67px;
+      margin-bottom: 17px;
     }
-    .product h3 { margin-bottom: 10px; }
-    .price { font-weight: bold; color: #0369a1; margin: 12px 0; }
+
+    .product-tag {
+      color: #0369a1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .product h3 {
+      font-size: 17px;
+      margin: 7px 0;
+    }
+
+    .product-description {
+      min-height: 40px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price {
+      color: #075985;
+      font-weight: 800;
+      font-size: 19px;
+      margin: 13px 0;
+    }
+
     .add-btn {
       width: 100%;
       border: 0;
-      border-radius: 8px;
-      background: #111827;
-      color: white;
+      border-radius: 9px;
       padding: 12px;
+      background: var(--dark);
+      color: white;
+      font-weight: 700;
       cursor: pointer;
     }
+
+    .add-btn:hover {
+      background: #173e71;
+    }
+
+    .about {
+      background: #eaf4ff;
+      border-radius: 18px;
+      padding: 30px;
+      margin-top: 55px;
+    }
+
+    .about p {
+      color: #52627b;
+      margin-top: 8px;
+    }
+
     footer {
-      text-align: center;
-      padding: 28px;
-      background: #111827;
+      background: var(--dark);
       color: white;
-      margin-top: 50px;
+      text-align: center;
+      padding: 28px 15px;
+      margin-top: 65px;
     }
-    @media (max-width: 520px) {
-      header { padding: 18px 5%; }
-      .hero { width: 92%; padding: 38px 7%; }
-      main { width: 92%; }
-      nav { gap: 12px; }
+
+    footer p {
+      color: #cbd5e1;
+      font-size: 13px;
     }
-    
-/* Advanced Shopping Cart */
-.cart-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s ease;
-  z-index: 1000;
-}
 
-.cart-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
+    /* Cart drawer */
 
-.cart-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: min(420px, 100%);
-  height: 100vh;
-  height: 100dvh;
-  background: #ffffff;
-  color: #172033;
-  z-index: 1001;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.15);
-}
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, .62);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s, visibility .25s;
+      z-index: 1000;
+    }
 
-.cart-panel.active {
-  transform: translateX(0);
-}
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e7eb;
-}
+    .cart-panel {
+      position: fixed;
+      z-index: 1001;
+      top: 0;
+      right: 0;
+      width: min(440px, 100%);
+      height: 100vh;
+      height: 100dvh;
+      padding: 23px;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      color: var(--text);
+      transform: translateX(105%);
+      transition: transform .28s ease;
+      box-shadow: -15px 0 50px #0002;
+    }
 
-.close-cart {
-  border: 0;
-  background: #eef2f7;
-  border-radius: 8px;
-  width: 38px;
-  height: 38px;
-  font-size: 20px;
-  cursor: pointer;
-}
+    .cart-panel.active {
+      transform: translateX(0);
+    }
 
-.cart-items {
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px 0;
-}
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
 
-.cart-item {
-  padding: 16px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
+    .cart-header h2 {
+      font-size: 23px;
+    }
 
-.cart-item h3 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
+    .close-cart {
+      width: 39px;
+      height: 39px;
+      border: 0;
+      border-radius: 10px;
+      background: #edf2f8;
+      cursor: pointer;
+      font-size: 20px;
+    }
 
-.cart-item-price {
-  color: #0369a1;
-  font-weight: bold;
-  margin: 8px 0;
-}
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 0;
+    }
 
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-}
+    .cart-empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 55px 12px;
+    }
 
-.quantity-controls button,
-.remove-item {
-  padding: 7px 11px;
-  border: 1px solid #d1d5db;
-  background: #f8fafc;
-  border-radius: 6px;
-  cursor: pointer;
-}
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 9px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+    }
 
-.remove-item {
-  color: #dc2626;
-  margin-top: 10px;
-}
+    .cart-item h3 {
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
 
-.cart-empty {
-  color: #64748b;
-  text-align: center;
-  padding: 35px 5px;
-}
+    .cart-item-price {
+      color: #0369a1;
+      font-weight: 800;
+      margin-top: 5px;
+    }
 
-.cart-footer {
-  padding-top: 18px;
-  border-top: 1px solid #e5e7eb;
-}
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 11px;
+    }
 
-.cart-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 19px;
-  margin-bottom: 18px;
-}
+    .quantity-controls button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #f8fafc;
+      cursor: pointer;
+      font-weight: 800;
+    }
 
-.cart-footer .add-btn {
-  width: 100%;
-}
+    .quantity-controls span {
+      min-width: 15px;
+      text-align: center;
+    }
 
-body.cart-open {
-  overflow: hidden;
-}
+    .remove-item {
+      align-self: start;
+      color: #dc2626;
+      background: #fff1f2;
+      border: 0;
+      border-radius: 7px;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
 
+    .cart-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 19px;
+      margin-bottom: 16px;
+    }
+
+    .cart-total strong {
+      overflow-wrap: anywhere;
+    }
+
+    .cart-footer .add-btn {
+      background: #0284c7;
+    }
+
+    .cart-note {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 950px) {
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav {
+        width: 100%;
+        gap: 17px;
+      }
+
+      .hero {
+        width: 92%;
+        padding: 42px 7%;
+        margin: 22px auto;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      main, .benefits {
+        width: 92%;
+      }
+
+      main {
+        margin-top: 42px;
+      }
+
+      .products {
+        gap: 12px;
+      }
+
+      .product {
+        padding: 10px;
+      }
+
+      .product-art {
+        height: 125px;
+        font-size: 49px;
+      }
+
+      .product h3 {
+        font-size: 15px;
+      }
+
+      .product-description {
+        font-size: 12px;
+      }
+
+      .price {
+        font-size: 16px;
+      }
+
+      .add-btn {
+        font-size: 12px;
+        padding: 11px 6px;
+      }
+
+      .cart-panel {
+        padding: 18px;
+      }
+    }
   </style>
-  
 </head>
+
 <body>
+  <div class="topbar">
+    ✨ Discover your next favorite product at NovaMart
+  </div>
+
   <header>
-    <div class="logo">Nova<span>Mart</span></div>
-    <nav>
+    <a href="#" class="logo">Nova<span>Mart</span></a>
+
+    <nav aria-label="Main navigation">
       <a href="#">Home</a>
       <a href="#products">Products</a>
-      <a href="#footer">Contact</a>
+      <a href="#about">About</a>
     </nav>
-    <button class="cart" onclick="showCart()">
-      Cart (<span id="cart-count">0</span>)
+
+    <button type="button" class="cart-button" onclick="showCart()">
+      🛒 Cart (<span id="cart-count">0</span>)
     </button>
   </header>
 
   <section class="hero">
+    <div class="eyebrow">The smarter way to shop</div>
     <h1>Shop Smarter.<br>Live Better.</h1>
-    <p>Discover everyday essentials, modern gadgets and products
-      you'll love — all in one place.</p>
-    <a class="shop-btn" href="#products">Explore Products →</a>
+    <p>
+      Discover modern gadgets and everyday essentials
+      in one place. Find your favorites and build your cart.
+    </p>
+    <a href="#products" class="primary-button">Explore Products →</a>
+  </section>
+
+  <section class="benefits" aria-label="Store benefits">
+    <div class="benefit">
+      <strong>🚚 Convenient Shopping</strong>
+      <p>Browse your favorite products in one place.</p>
+    </div>
+    <div class="benefit">
+      <strong>🔒 Simple Demo Cart</strong>
+      <p>Manage items and quantities with ease.</p>
+    </div>
+    <div class="benefit">
+      <strong>📱 Responsive Design</strong>
+      <p>Enjoy the store on desktop or mobile.</p>
+    </div>
   </section>
 
   <main id="products">
     <div class="section-heading">
       <h2>Featured Products</h2>
-      <p>Discover our picks for you.</p>
+      <p>Explore our selection of everyday favorites.</p>
     </div>
 
     <div class="products">
       <article class="product">
-        <div class="product-art">🎧</div>
+        <div class="product-art" aria-hidden="true">🎧</div>
+        <div class="product-tag">Audio</div>
         <h3>Wireless Headphones</h3>
-        <p>Enjoy your favorite music.</p>
+        <p class="product-description">Enjoy music with a modern everyday design.</p>
         <div class="price">Rs. 3,500</div>
-        <button class="add-btn" onclick="addToCart('Wireless Headphones',3500)">Add to Cart</button>
+        <button type="button" class="add-btn"
+          onclick="addToCart('headphones')">Add to Cart</button>
       </article>
 
       <article class="product">
-        <div class="product-art">⌚</div>
+        <div class="product-art" aria-hidden="true">⌚</div>
+        <div class="product-tag">Wearables</div>
         <h3>Smart Watch</h3>
-        <p>Style meets technology.</p>
+        <p class="product-description">A smart accessory for your daily routine.</p>
         <div class="price">Rs. 5,000</div>
-        <button class="add-btn" onclick="addToCart('Smart Watch',5000)">Add to Cart</button>
+        <button type="button" class="add-btn"
+          onclick="addToCart('watch')">Add to Cart</button>
       </article>
 
       <article class="product">
-        <div class="product-art">🎒</div>
+        <div class="product-art" aria-hidden="true">🎒</div>
+        <div class="product-tag">Lifestyle</div>
         <h3>Everyday Backpack</h3>
-        <p>Ready for every adventure.</p>
+        <p class="product-description">Carry your essentials wherever you go.</p>
         <div class="price">Rs. 2,200</div>
-        <button class="add-btn" onclick="addToCart('Everyday Backpack',2200)">Add to Cart</button>
+        <button type="button" class="add-btn"
+          onclick="addToCart('backpack')">Add to Cart</button>
       </article>
 
       <article class="product">
-        <div class="product-art">🔊</div>
+        <div class="product-art" aria-hidden="true">🔊</div>
+        <div class="product-tag">Audio</div>
         <h3>Bluetooth Speaker</h3>
-        <p>Bring sound to life.</p>
+        <p class="product-description">Bring your favorite sounds to life.</p>
         <div class="price">Rs. 2,800</div>
-        <button class="add-btn" onclick="addToCart('Bluetooth Speaker',2800)">Add to Cart</button>
+        <button type="button" class="add-btn"
+          onclick="addToCart('speaker')">Add to Cart</button>
       </article>
     </div>
+
+    <section class="about" id="about">
+      <h2>Welcome to NovaMart</h2>
+      <p>
+        NovaMart is a demonstration e-commerce project built by
+        Ayan Ali to showcase web development skills.
+        This demo does not process real orders or payments.
+      </p>
+    </section>
   </main>
 
-  <footer id="footer">
-    <p>© 2026 NovaMart | Demo E-commerce Project by Ayan Ali</p>
+  <footer>
+    <p>© 2026 NovaMart | E-commerce Demo by Ayan Ali</p>
   </footer>
-  
-<!-- Shopping Cart Panel -->
-<div class="cart-overlay" id="cart-overlay"
-     onclick="closeCart()"></div>
 
-<aside class="cart-panel" id="cart-panel"
-       aria-label="Shopping cart"
-       aria-hidden="true">
+  <!-- Cart panel -->
+  <div class="cart-overlay" id="cart-overlay"
+       onclick="closeCart()"></div>
 
-  <div class="cart-header">
-    <h2>Your Cart</h2>
-    <button type="button" class="close-cart"
-            onclick="closeCart()"
-            aria-label="Close cart">✕</button>
-  </div>
+  <aside class="cart-panel" id="cart-panel"
+         aria-label="Shopping cart" aria-hidden="true"
+         role="dialog" aria-modal="true">
 
-  <div id="cart-items" class="cart-items"></div>
-
-  <div class="cart-footer">
-    <div class="cart-total">
-      <span>Total</span>
-      <strong id="cart-total">Rs. 0</strong>
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button type="button" class="close-cart"
+              onclick="closeCart()" aria-label="Close cart">✕</button>
     </div>
-    <button type="button" class="add-btn"
-            onclick="closeCart()">
-      Continue Shopping
-    </button>
-  </div>
 
-</aside>
+    <div class="cart-items" id="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total">Rs. 0</strong>
+      </div>
+      <button type="button" class="add-btn" onclick="closeCart()">
+        Continue Shopping
+      </button>
+      <p class="cart-note">
+        Demo store only. No real order or payment is processed.
+      </p>
+    </div>
+  </aside>
 
   <script>
-    let cart = [];
-   
-const CART_STORAGE_KEY = "novamart-cart-v1";
+    const PRODUCTS = {
+      headphones: { name: "Wireless Headphones", price: 3500 },
+      watch: { name: "Smart Watch", price: 5000 },
+      backpack: { name: "Everyday Backpack", price: 2200 },
+      speaker: { name: "Bluetooth Speaker", price: 2800 }
+    };
 
-let cart = [];
+    const STORAGE_KEY = "novamart-cart-v2";
+    let cart = loadCart();
 
-try {
-  const savedCart = JSON.parse(
-    localStorage.getItem(CART_STORAGE_KEY) || "[]"
-  );
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-  if (Array.isArray(savedCart)) {
-    cart = savedCart.filter(item =>
-      item &&
-      typeof item.name === "string" &&
-      Number.isFinite(item.price) &&
-      item.price >= 0 &&
-      Number.isInteger(item.quantity) &&
-      item.quantity > 0
-    );
-  }
-} catch {
-  cart = [];
-}
+        if (!Array.isArray(saved)) return [];
 
-function saveCart() {
-  try {
-    localStorage.setItem(
-      CART_STORAGE_KEY,
-      JSON.stringify(cart)
-    );
-  } catch {
-    alert("Cart save nahi ho saka. Browser storage check karo.");
-  }
-}
-
-function updateCartCount() {
-  const count = cart.reduce(
-    (sum, item) => sum + item.quantity, 0
-  );
-
-  document.getElementById("cart-count").textContent = count;
-}
-
-function renderCart() {
-  const itemsContainer = document.getElementById("cart-items");
-  const totalElement = document.getElementById("cart-total");
-
-  if (cart.length === 0) {
-    itemsContainer.innerHTML =
-      '<p class="cart-empty">Your cart is empty 🛒</p>';
-
-    totalElement.textContent = "Rs. 0";
-    updateCartCount();
-    return;
-  }
-
-  itemsContainer.replaceChildren();
-
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.price * item.quantity;
-
-    const article = document.createElement("article");
-    article.className = "cart-item";
-
-    const name = document.createElement("h3");
-    name.textContent = item.name;
-
-    const price = document.createElement("p");
-    price.className = "cart-item-price";
-    price.textContent =
-      "Rs. " + (item.price * item.quantity).toLocaleString("en-PK");
-
-    const controls = document.createElement("div");
-    controls.className = "quantity-controls";
-
-    const minus = document.createElement("button");
-    minus.type = "button";
-    minus.textContent = "−";
-    minus.setAttribute("aria-label", "Decrease quantity");
-    minus.addEventListener("click", () => changeQuantity(index, -1));
-
-    const quantity = document.createElement("span");
-    quantity.textContent = item.quantity;
-
-    const plus = document.createElement("button");
-    plus.type = "button";
-    plus.textContent = "+";
-    plus.setAttribute("aria-label", "Increase quantity");
-    plus.addEventListener("click", () => changeQuantity(index, 1));
-
-    controls.append(minus, quantity, plus);
-
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "remove-item";
-    remove.textContent = "Remove";
-    remove.addEventListener("click", () => removeItem(index));
-
-    article.append(name, price, controls, remove);
-    itemsContainer.append(article);
-  });
-
-  totalElement.textContent =
-    "Rs. " + total.toLocaleString("en-PK");
-
-  updateCartCount();
-}
-
-function addToCart(name, price) {
-  const existing = cart.find(item => item.name === name);
-
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ name, price, quantity: 1 });
-  }
-
-  saveCart();
-  renderCart();
-  openCart();
-}
-
-function changeQuantity(index, amount) {
-  if (!cart[index]) return;
-
-  cart[index].quantity += amount;
-
-  if (cart[index].quantity <= 0) {
-    cart.splice(index, 1);
-  }
-
-  saveCart();
-  renderCart();
-}
-
-function removeItem(index) {
-  if (!cart[index]) return;
-
-  cart.splice(index, 1);
-  saveCart();
-  renderCart();
-}
-
-function openCart() {
-  document.getElementById("cart-panel").classList.add("active");
-  document.getElementById("cart-overlay").classList.add("active");
-  document.getElementById("cart-panel").setAttribute("aria-hidden", "false");
-  document.body.classList.add("cart-open");
-}
-
-function closeCart() {
-  document.getElementById("cart-panel").classList.remove("active");
-  document.getElementById("cart-overlay").classList.remove("active");
-  document.getElementById("cart-panel").setAttribute("aria-hidden", "true");
-  document.body.classList.remove("cart-open");
-}
-
-function showCart() {
-  renderCart();
-  openCart();
-}
-
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeCart();
-});
-
-renderCart();
-
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      alert(
-        cart.map(item => item.name + ' — Rs. ' + item.price).join('\n') +
-        '\n\nTotal: Rs. ' + total
-      );
+        return saved.filter(item =>
+          item &&
+          PRODUCTS[item.id] &&
+          Number.isInteger(item.quantity) &&
+          item.quantity > 0 &&
+          item.quantity <= 99
+        ).map(item => ({
+          id: item.id,
+          quantity: item.quantity
+        }));
+      } catch (error) {
+        return [];
+      }
     }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      } catch (error) {
+        console.warn("Cart could not be saved in browser storage.", error);
+      }
+    }
+
+    function formatPrice(amount) {
+      return "Rs. " + amount.toLocaleString("en-PK");
+    }
+
+    function addToCart(id) {
+      const product = PRODUCTS[id];
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === id);
+
+      if (existing) {
+        if (existing.quantity >= 99) {
+          alert("Maximum quantity is 99.");
+          return;
+        }
+        existing.quantity += 1;
+      } else {
+        cart.push({ id, quantity: 1 });
+      }
+
+      saveCart();
+      renderCart();
+      openCart();
+    }
+
+    function changeQuantity(id, amount) {
+      const item = cart.find(entry => entry.id === id);
+      if (!item) return;
+
+      item.quantity += amount;
+
+      if (item.quantity <= 0) {
+        cart = cart.filter(entry => entry.id !== id);
+      } else if (item.quantity > 99) {
+        item.quantity = 99;
+      }
+
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(item => item.id !== id);
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cart-items");
+      const totalElement = document.getElementById("cart-total");
+      const countElement = document.getElementById("cart-count");
+
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      countElement.textContent = count;
+
+      const total = cart.reduce((sum, item) => {
+        return sum + PRODUCTS[item.id].price * item.quantity;
+      }, 0);
+
+      totalElement.textContent = formatPrice(total);
+      container.replaceChildren();
+
+      if (cart.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "cart-empty";
+        empty.textContent = "Your cart is empty 🛒";
+        container.appendChild(empty);
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = PRODUCTS[item.id];
+        const article = document.createElement("article");
+        article.className = "cart-item";
+
+        const details = document.createElement("div");
+
+        const title = document.createElement("h3");
+        title.textContent = product.name;
+
+        const price = document.createElement("p");
+        price.className = "cart-item-price";
+        price.textContent = formatPrice(product.price * item.quantity);
+
+        const controls = document.createElement("div");
+        controls.className = "quantity-controls";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "−";
+        minus.setAttribute("aria-label", "Decrease " + product.name);
+        minus.addEventListener("click", () => changeQuantity(item.id, -1));
+
+        const quantity = document.createElement("span");
+        quantity.textContent = item.quantity;
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.setAttribute("aria-label", "Increase " + product.name);
+        plus.addEventListener("click", () => changeQuantity(item.id, 1));
+
+        controls.append(minus, quantity, plus);
+        details.append(title, price, controls);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-item";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => removeItem(item.id));
+
+        article.append(details, remove);
+        container.appendChild(article);
+      });
+    }
+
+    function openCart() {
+      document.getElementById("cart-panel").classList.add("active");
+      document.getElementById("cart-overlay").classList.add("active");
+      document.getElementById("cart-panel").setAttribute("aria-hidden", "false");
+      document.body.classList.add("cart-open");
+    }
+
+    function closeCart() {
+      document.getElementById("cart-panel").classList.remove("active");
+      document.getElementById("cart-overlay").classList.remove("active");
+      document.getElementById("cart-panel").setAttribute("aria-hidden", "true");
+      document.body.classList.remove("cart-open");
+    }
+
+    function showCart() {
+      renderCart();
+      openCart();
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCart();
+    });
+
+    renderCart();
   </script>
 </body>
 </html>
